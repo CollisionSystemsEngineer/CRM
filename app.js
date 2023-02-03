@@ -1,8 +1,11 @@
 let express = require("express")
 let mongoose = require("mongoose")
+let cookieParser = require ("cookie-parser")
+let dotenv = require ("dotenv");
 
 let app = express()
 
+dotenv.config();
 
 let indexRoutes = require("./routes/routeindex")
 
@@ -14,7 +17,9 @@ mongoose.connect('mongodb://127.0.0.1:27017/CRM')
 
 
 app.set("view engine","ejs")
+app.use(express.static(__dirname + '/public'));
 app.use(express.urlencoded({extended:false}))
+app.use(cookieParser())
 //app.use(express.json())
 
 app.use("/",indexRoutes)
