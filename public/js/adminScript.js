@@ -1,23 +1,19 @@
 const router = require("../../routes/routeindex");
 
-$('.list-group-item').on('click', function (e) {
 
-  $(this).addClass('active');
-    $(this).siblings().removeClass('active');  
-  });
 
   $("#list-doctores").on('click', function (e) {
     
-    router.get("/doctores")
+    doctores = router.get("/doctores")
   });
 
   $("#list-pacientes").on('click', function (e) {
     
-    router.get("/pacientes")
+    pacientes = router.get("/pacientes")
   });
 
   $("#list-proveedores").on('click', function (e) {
-    router.get("/proveedores")
+    proveedores = router.get("/proveedores")
   });
 
   $("agregar-registro").on('click', function (e) {
@@ -33,4 +29,3 @@ $('.list-group-item').on('click', function (e) {
     }
 
   });
-  

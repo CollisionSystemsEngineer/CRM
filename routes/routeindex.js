@@ -121,7 +121,7 @@ router.post("/newproveedor", async function(req, res){
     res.render("registroProveedor")
 })
 router.post("/login", async function(req, res){
-
+    let auth = false
     let email = req.body.email
     let plainpassword = req.body.password
 
@@ -129,11 +129,13 @@ router.post("/login", async function(req, res){
 
     if(!user){
         res.redirect("/signup")
+        auth = false
     }else{
         //El usuario existe, validar contraseña
         let valid = await bcrypt.compareSync(plainpassword,user.password)
+        auth = true
         //Generar TOKEN y mandar a HOME
-        if(valid){
+        if(valid && auth === true){
             //Recibe información a guardar(USERID) + Texto de Firma de TOKEN para que sea único
             // + Tiempo de expiración
             let token = jwt.sign({id: user.email}, process.env.SECRETO,{
