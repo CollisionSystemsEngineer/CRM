@@ -1,0 +1,29 @@
+let express = require("express")
+let mongoose = require("mongoose")
+let cookieParser = require ("cookie-parser")
+let dotenv = require ("dotenv");
+
+let app = express()
+
+dotenv.config();
+let indexRoutes = require("./routes/routeindex")
+
+// connection to Mongo db
+mongoose.set('strictQuery', true)
+mongoose.connect('mongodb://127.0.0.1:27017/CRM')
+    .then(db => console.log('db connected'))
+    .catch(err => console.log(err));
+
+app.set("view engine","ejs")
+app.use(express.urlencoded({extended:false}))
+app.use(express.static(__dirname + '/public'));
+app.use(cookieParser())
+app.use(express.static('public'))
+app.use(express.static("css/adminStyle" + '/public'));
+
+app.use("/",indexRoutes)
+
+app.listen(3000, ()=>{
+    console.log("Servidor encendido en puerto 3000")
+})
+
