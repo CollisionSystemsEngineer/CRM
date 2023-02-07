@@ -9,7 +9,8 @@ cedula: String,
 especialidad: String,
 pacientes: Number,
 facturas: String,
-tipo: String
+tipo: String,
+usuario: String
 })
 
 module.exports = mongoose.model('doctor',DoctorSchema)

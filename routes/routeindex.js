@@ -6,6 +6,8 @@ let Doctor = require("../model/doctor")
 let Paciente = require("../model/paciente")
 let Proveedor = require("../model/proveedor")
 
+let verify = require("../middleware/acceso")
+
 let bcrypt = require("bcrypt");
 let jwt = require("jsonwebtoken");
 
@@ -56,11 +58,12 @@ async function getProviders () {
     proveedores = await Proveedor.find();
 }
 
-router.get("/admin", function(req,res){
+router.get("/admin", verify, async function(req,res){
     getDoctors()
     getPatients()
     getProviders()
-    res.render("admin",{NombreAtributos, AtributosDoctores, doctores, AtributosPacientes, pacientes, AtributosProveedores, proveedores})
+    let doctor = await Doctor.find({usuario: req.userId})
+    res.render("admin",{doctor})
 })
 
 router.get("/", function(req,res){
@@ -80,6 +83,14 @@ router.get("/signup", function(req,res){
 router.get("/registroDoctor", function(req,res){
 
     res.render("registroDoctor")
+})
+
+router.post("/registroDoctor", verify, async function(req,res){
+
+    let doctor = new Doctor(req.body)
+    doctor.usuario = req.userId
+    await doctor.save()
+    res.redirect("/admin")
 })
 
 router.get("/registroPaciente", function(req,res){
@@ -106,9 +117,10 @@ router.post("/signup", async function(req, res){
     }
 })
 
-router.post("/newdoctor", async function(req, res){
+router.get("/newdoctor", async function(req, res){
     //Save new doctor
-    res.render("registroDoctor")
+    let doctor = await Doctor.find()
+    res.render('registroDoctor')
 })
 
 router.post("/newpaciente", async function(req, res){
@@ -153,6 +165,28 @@ router.post("/login", async function(req, res){
      
 })
 
+//Editar
+router.get('/edit/:id', async function(req,res){
+
+    let id = req.params.id
+    let doctor = await Doctor.findById(id)
+    res.render("editregistroDoctor",{doctor})   
+  })
+  
+router.post('/edit/:id', async function(req,res){
+  
+    let id = req.params.id
+    await Doctor.updateOne({_id: id}, req.body)
+    res.redirect("/admin")
+  })
 
 
+// Eliminar el elemento
+router.get("/delete/:id", async function(req,res){
+
+    let id = req.params.id
+    await Doctor.remove({_id:id})
+    res.redirect("/admin")
+})
+   
 module.exports = router;
