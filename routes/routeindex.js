@@ -2,6 +2,9 @@ const { render } = require('ejs');
 const express = require('express');
 const router = express.Router();
 let User = require("../model/user")
+let Doctor = require("../model/doctor")
+let Paciente = require("../model/paciente")
+let Proveedor = require("../model/proveedor")
 
 let bcrypt = require("bcrypt");
 let jwt = require("jsonwebtoken");
@@ -62,19 +65,17 @@ let AtributosProveedores = [{atributo:"Nombre"},
                 {atributo:"Facturas mensuales"},
                 {atributo:"Tipo"}];
 
-let Proveedores = [{Nombre:"Juanito",
-       Email:"juanito@outlook.com",
-       Cedula:"0894619",
-       Especialidad: "Cardiologo",
-       Pacientes: 20,
-       Facturas: "documentos/facturas/factura1.doc",
+let Proveedores = [{Empresa:"La norteña",
+       RFC:"ASFSDGRG9890T7",
+       Registro:"0894619",
+       Localidad: "Monterrey viejon",
+       Estado: "Nuevo leon pariente",
         Tipo: "Proveedor"},
-       {Nombre:"Anita",
-       Email:"anita@outlook.com",
-       Cedula:"0894618",
-       Especialidad: "Pediatra",
-       Pacientes: 30,
-       Facturas: "documentos/facturas/factura2.doc",
+       {Empresa:"El Sureño",
+       RFC:"ASFSDGR4390T7",
+       Registro:"08922219",
+       Localidad: "Cabo san lucas",
+       Estado: "De loh caboh primo",
         Tipo: "Proveedor"}];
 
 router.get("/admin", function(req,res){
