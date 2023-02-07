@@ -100,6 +100,11 @@ router.get("/registroDoctor", function(req,res){
     res.render("registroDoctor")
 })
 
+router.get("/registroPaciente", function(req,res){
+
+    res.render("registroPaciente")
+})
+
 router.post("/signup", async function(req, res){
 
     //Objeto con string de correo + contraseña
