@@ -13,13 +13,13 @@ body, html {
     border-radius: 0
   }
   .btn-group{
-display:flex;
-flex-direction: row;
-justify-content: space-evenly;
+    position:relative; 
+    left:150px;
   }
   .btn-larger {
     margin-top: 30px;
-      padding: 15px 15px !important;
+    margin-right: 10px;
+      padding: 15px 40px !important;
       border:2px solid #31B1F7 !important;;
       border-radius: 0px !important;;
       text-transform: uppercase;
@@ -82,6 +82,10 @@ justify-content: space-evenly;
       background: rgba(0,0,0,0.8);
       margin: 50px 0 20px 0
   }
+  .btn-group{
+    position:relative; 
+    left:80px;
+  }
   }
   #userform .nav-tabs.nav-justified > li > a {
       text-transform: uppercase;
@@ -134,6 +138,10 @@ justify-content: space-evenly;
       -moz-transition: all .6s;
       transition: all .6s;
   }
+  .btn-group{
+    position:relative; 
+    left:80px;
+  }
   #userform .nav-tabs.nav-justified > li > a:hover {
       background-color: #31B1F7;
       border-color: transparent;
@@ -147,6 +155,10 @@ justify-content: space-evenly;
   .nav-justified > li {
       display: table-cell !important;
       width: 1% !important;
+  }
+  .btn-group{
+    position:relative; 
+    left:50px;
   }
   }
   #userform .nav-tabs {
