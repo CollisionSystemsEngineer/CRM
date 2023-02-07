@@ -17,11 +17,11 @@ $('.list-group-item').on('click', function (e) {
   });
 
   $("#list-proveedores").on('click', function (e) {
-    
     router.get("/proveedores")
   });
 
-  $("#agregar-registro").on('click', function (e) {
+  $("agregar-registro").on('click', function (e) {
+    console.log("Agregar registro")
     e.preventDefault()
     if (NombreAtributos[0] === "doctores") {
      router.post("/newdoctor")
