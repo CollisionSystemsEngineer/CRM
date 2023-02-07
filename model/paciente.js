@@ -1,7 +1,7 @@
 let mongoose = require("mongoose")
 let Schema = mongoose.Schema
 
-let Paciente = Schema({
+let PacienteSchema = Schema({
 
 nombre: String,
 apellido: String,

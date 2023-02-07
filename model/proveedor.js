@@ -1,7 +1,7 @@
 let mongoose = require("mongoose")
 let Schema = mongoose.Schema
 
-let Proveedor = Schema({
+let ProveedorSchema = Schema({
 
 empresa: String,
 rfc: String,
@@ -11,4 +11,4 @@ estado: Number,
 tipo: String
 })
 
-module.exports = mongoose.model('proveedor',PacienteSchema)
+module.exports = mongoose.model('proveedor',ProveedorSchema)
