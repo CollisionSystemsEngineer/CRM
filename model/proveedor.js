@@ -8,7 +8,8 @@ rfc: String,
 registro: String,
 localidad: String,
 estado: Number,
-tipo: String
+tipo: String,
+usuario: String
 })
 
 module.exports = mongoose.model('proveedor',ProveedorSchema)

@@ -63,7 +63,9 @@ router.get("/admin", verify, async function(req,res){
     getPatients()
     getProviders()
     let doctor = await Doctor.find({usuario: req.userId})
-    res.render("admin",{doctor})
+    let paciente = await Paciente.find({usuario: req.userId})
+    let proveedor = await Proveedor.find({usuario: req.userId})
+    res.render("admin",{doctor, paciente, proveedor})
 })
 
 router.get("/", function(req,res){
@@ -98,6 +100,27 @@ router.get("/registroPaciente", function(req,res){
     res.render("registroPaciente")
 })
 
+router.post("/registroPaciente", verify, async function(req,res){
+
+    let paciente = new Paciente(req.body)
+    paciente.usuario = req.userId
+    await paciente.save()
+    res.redirect("/admin")
+})
+
+router.get("/registroProveedor", function(req,res){
+
+    res.render("registroProveedor")
+})
+
+router.post("/registroProveedor", verify, async function(req,res){
+
+    let proveedor = new Proveedor(req.body)
+    proveedor.usuario = req.userId
+    await proveedor.save()
+    res.redirect("/admin")
+})
+
 router.post("/signup", async function(req, res){
 
     //Objeto con string de correo + contraseña
@@ -123,13 +146,15 @@ router.get("/newdoctor", async function(req, res){
     res.render('registroDoctor')
 })
 
-router.post("/newpaciente", async function(req, res){
+router.get("/newpaciente", async function(req, res){
     //Save new patient
-    res.render("registroDoctor")
+    let paciente = await Paciente.find()
+    res.render('registroPaciente')
 })
 
-router.post("/newproveedor", async function(req, res){
+router.get("/newproveedor", async function(req, res){
     //Save new doctor
+    let proveedor = await Proveedor.find()
     res.render("registroProveedor")
 })
 router.post("/login", async function(req, res){
@@ -165,7 +190,7 @@ router.post("/login", async function(req, res){
      
 })
 
-//Editar
+//Editar Doctor
 router.get('/edit/:id', async function(req,res){
 
     let id = req.params.id
@@ -173,13 +198,42 @@ router.get('/edit/:id', async function(req,res){
     res.render("editregistroDoctor",{doctor})   
   })
   
+//Editar Paciente
+router.get('/editpa/:id', async function(req,res){
+
+    let id = req.params.id
+    let paciente = await Paciente.findById(id)
+    res.render("editregistroPaciente",{paciente})   
+  })
+
+//Editar Proveedor
+router.get('/editpr/:id', async function(req,res){
+
+    let id = req.params.id
+    let proveedor = await Proveedor.findById(id)
+    res.render("editregistroProveedor",{proveedor})   
+  })
+
 router.post('/edit/:id', async function(req,res){
   
     let id = req.params.id
     await Doctor.updateOne({_id: id}, req.body)
     res.redirect("/admin")
-  })
+})
 
+router.post('/editpa/:id', async function(req,res){
+  
+    let id = req.params.id
+    await Paciente.updateOne({_id: id}, req.body)
+    res.redirect("/admin")
+})
+
+router.post('/editpr/:id', async function(req,res){
+  
+    let id = req.params.id
+    await Proveedor.updateOne({_id: id}, req.body)
+    res.redirect("/admin")
+})
 
 // Eliminar el elemento
 router.get("/delete/:id", async function(req,res){
@@ -188,5 +242,27 @@ router.get("/delete/:id", async function(req,res){
     await Doctor.remove({_id:id})
     res.redirect("/admin")
 })
-   
+
+// Eliminar el elemento
+router.get("/deletepa/:id", async function(req,res){
+
+    let id = req.params.id
+    await Paciente.remove({_id:id})
+    res.redirect("/admin")
+})
+
+// Eliminar el elemento
+router.get("/deletepr/:id", async function(req,res){
+
+    let id = req.params.id
+    await Proveedor.remove({_id:id})
+    res.redirect("/admin")
+})
+
+router.get("/logout", function(req,res){
+    //Borrar cookie para salir de la sesión
+    res.clearCookie("token")
+    res.redirect("/")
+})
+
 module.exports = router;

@@ -9,7 +9,8 @@ email: String,
 sexo: String,
 edad: Number,
 foto: String,
-tipo: String
+tipo: String,
+usuario: String
 })
 
 module.exports = mongoose.model('paciente',PacienteSchema)

@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="/css/registroProveedorStyle.css">
+  <link rel="stylesheet" href="/css/registroPacienteStyle.css">
 
 </head>
 <body>
@@ -21,21 +21,21 @@
         </ul>
         <div class="tab-content">
           <div class="tab-pane fade active in" id="signup">
-            <h2 class="text-uppercase text-center"> Registro de Proveedor</h2>
-            <form id="signup" action="/registroProveedor" method="POST">
+            <h2 class="text-uppercase text-center"> Registro de paciente</h2>
+            <form id="signup" action="/editpa/<%= paciente._id %>" method="POST">
               <div class="row">
                 <div class="col-xs-12 col-sm-6"> 
                   <div class="form-group">
                     <label> Nombre<span class="req">*</span> </label>
-                    <input type="text" name="empresa" class="form-control" id="empresa" required data-validation-required-message="Por favor escriba su nombre" autocomplete="off">
+                    <input type="text" name="nombre" value="<%= paciente.nombre %>" class="form-control" id="nombre" required data-validation-required-message="Por favor escriba su nombre" autocomplete="off">
                     <p class="help-block text-danger"></p>
                   </div>
                 </div>
 
                 <div class="col-xs-12 col-sm-6">
                   <div class="form-group">
-                    <label>RFC<span class="req">*</span> </label>
-                    <input type="text" name="rfc" class="form-control" id="rfc" required data-validation-required-message="Por favor escriba su cédula" autocomplete="off">
+                    <label>Apellido<span class="req">*</span> </label>
+                    <input type="text" name="apellido" value="<%= paciente.apellido %>" class="form-control" id="apellido" required data-validation-required-message="Por favor escriba su cédula" autocomplete="off">
                     <p class="help-block text-danger"></p>
                   </div>
                 </div>
@@ -45,16 +45,16 @@
               <div class="row">
                 <div class="col-xs-12 col-sm-6"> 
                   <div class="form-group">
-                    <label>  Registro<span class="req">*</span> </label>
-                    <input type="text" name="registro" class="form-control" id="registro" required data-validation-required-message="Por favor escriba su correo" autocomplete="off">
+                    <label>  Email<span class="req">*</span> </label>
+                    <input type="email" name="email" value="<%= paciente.email %>" class="form-control" id="email" required data-validation-required-message="Por favor escriba su correo" autocomplete="off">
                     <p class="help-block text-danger"></p>
                   </div>   
                 </div>
 
                 <div class="col-xs-12 col-sm-6">
                   <div class="form-group">
-                    <label>Localidad<span class="req">*</span> </label>
-                    <input type="text" name="localidad" class="form-control" id="localidad" required data-validation-required-message="Por favor escriba su cédula" autocomplete="off">
+                    <label>Sexo<span class="req">*</span> </label>
+                    <input type="text" name="sexo" value="<%= paciente.sexo %>" class="form-control" id="sexo" required data-validation-required-message="Por favor escriba su cédula" autocomplete="off">
                     <p class="help-block text-danger"></p>
                   </div>
                 </div>
@@ -63,13 +63,19 @@
               <div class="row">
                 <div class="col-xs-12 col-sm-6"> 
                   <div class="form-group">
-                    <label> Estado<span class="req">*</span> </label>
-                    <input type="text" name="estado" class="form-control" id="estado" required data-validation-required-message="Por favor escriba la cantidad de pacientes" autocomplete="off">
+                    <label> Edad<span class="req">*</span> </label>
+                    <input type="text" name="edad" value="<%= paciente.edad %>" class="form-control" id="edad" required data-validation-required-message="Por favor escriba la cantidad de pacientes" autocomplete="off">
                     <p class="help-block text-danger"></p>
                   </div>
                 </div>
 
                 
+              </div>
+              
+              <div class="form-group">
+                <p><br>Foto: </p>
+                    <input type="file" name="foto" value="<%= paciente.foto %>" class="form-control" id="foto" accept="image/png, image/jpeg">
+                    <p class="help-block text-danger"></p>
               </div>
 
               <div class="btn-group" role="group">
@@ -88,7 +94,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </body>
 <!-- partial -->
-  <script  src="./public/js/registroProveedor.js"></script>
+  <script  src="./public/js/registroPacienteScript.js"></script>
 
 </body>
 </html>

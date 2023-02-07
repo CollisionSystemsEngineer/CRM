@@ -13,11 +13,14 @@
           <div class="list-group" id="list-tab" role="tablist">
             <a class="navbar-brand">Menú</a>
             <a class="list-group-item list-group-item-action active" id="doctores" data-bs-toggle="list" href="#list-doctores" role="tab" aria-controls="list-doctores">doctores</a>
+            <td> <a href ="/newdoctor"><button class="btn btn-primary" id="agregar-registro">Agregar...</button></a></td>
             <a class="list-group-item list-group-item-action" id="pacientes" data-bs-toggle="list" href="#list-pacientes" role="tab" aria-controls="list-pacientes">pacientes</a>
+            <td> <a href ="/newpaciente"><button class="btn btn-primary" id="agregar-registro">Agregar...</button></a></td>
             <a class="list-group-item list-group-item-action" id="proveedores" data-bs-toggle="list" href="#list-proveedores" role="tab" aria-controls="list-proveedore">proveedores</a> 
+            <td> <a href ="/newproveedor"><button class="btn btn-primary" id="agregar-registro">Agregar...</button></a></td>
         </div>
         <div class="btn-group fixed-bottom" role="group">
-            <a href="/" class="btn btn-primary">Salir</a>
+            <a href="/logout" class="btn btn-primary">Salir</a>
             <a href="/configuracion" class="btn btn-primary">Configuración</a>
 
         </div> 
@@ -27,7 +30,7 @@
                 <thead>
                     <tr>
                         <th>Registros</th>
-                        <% if(doctor.length === 0) { %>
+                        <% if(doctor.length === 0 && paciente.length === 0 && proveedor.length === 0) { %>
                             <td>Sin registros</td>
                           <% } else { %>
                           
@@ -38,29 +41,54 @@
                                 <% for(let i = 0; i < doctor.length; i++) { %>
                           
                                 <div class="blog-post">
-                                  <h2 class="blog-post-title"><%= doctor[i].nombre %></h2>
-                                  <h2 class="blog-post-title"><%= doctor[i].email %></h2>
-                                  <h2 class="blog-post-title"><%= doctor[i].cedula %></h2>
-                                  <h2 class="blog-post-title"><%= doctor[i].especialidad %></h2>
-                                  <h2 class="blog-post-title"><%= doctor[i].pacientes %></h2>
-                                  <h2 class="blog-post-title"><%= doctor[i].facturas %></h2>
+                                  <h2 class="blog-post-title">Nombre: <%= doctor[i].nombre %></h2>
+                                  <h2 class="blog-post-title">Correo: <%= doctor[i].email %></h2>
+                                  <h2 class="blog-post-title">Número de Cédula: <%= doctor[i].cedula %></h2>
+                                  <h2 class="blog-post-title">Especialidad: <%= doctor[i].especialidad %></h2>
+                                  <h2 class="blog-post-title">Número de Pacientes: <%= doctor[i].pacientes %></h2>
+                                  <h2 class="blog-post-title">Facturas: <%= doctor[i].facturas %></h2>
                                   <a class = "btn btn-danger" href ="/delete/<%= doctor[i]._id %>"> Delete </a>
                                   <a class = "btn btn-info" href ="/edit/<%= doctor[i]._id %>"> Edit </a>
                                 </div>
                           
                                 <% } %>
+
+                                <% for(let i = 0; i < paciente.length; i++) { %>
+                          
+                                  <div class="blog-post">
+                                    <h2 class="blog-post-title">Nombre: <%= paciente[i].nombre %></h2>
+                                    <h2 class="blog-post-title">Apellido: <%= paciente[i].apellido %></h2>
+                                    <h2 class="blog-post-title">Correo: <%= paciente[i].email %></h2>
+                                    <h2 class="blog-post-title">Sexo: <%= paciente[i].sexo %></h2>
+                                    <h2 class="blog-post-title">Edad: <%= paciente[i].edad %></h2>
+                                    <h2 class="blog-post-title">Foto: <%= paciente[i].foto %></h2>
+                                    <a class = "btn btn-danger" href ="/deletepa/<%= paciente[i]._id %>"> Delete </a>
+                                    <a class = "btn btn-info" href ="/editpa/<%= paciente[i]._id %>"> Edit </a>
+                                  </div>
+                            
+                                  <% } %>
+
+                                  <% for(let i = 0; i < proveedor.length; i++) { %>
+                          
+                                    <div class="blog-post">
+                                      <h2 class="blog-post-title">Empresa: <%= proveedor[i].empresa %></h2>
+                                      <h2 class="blog-post-title">RFC: <%= proveedor[i].rfc %></h2>
+                                      <h2 class="blog-post-title">Registro: <%= proveedor[i].registro %></h2>
+                                      <h2 class="blog-post-title">Localidad: <%= proveedor[i].localidad %></h2>
+                                      <h2 class="blog-post-title">Estado: <%= proveedor[i].estado %></h2>
+                                      <h2 class="blog-post-title">Facturas: <%= proveedor[i].tipo %></h2>
+                                      <a class = "btn btn-danger" href ="/deletepr/<%= proveedor[i]._id %>"> Delete </a>
+                                      <a class = "btn btn-info" href ="/editpr/<%= proveedor[i]._id %>"> Edit </a>
+                                    </div>
+                              
+                                    <% } %>
                           
                               </div>
                             </div>
                           </main>
                           <% } %>
                     </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td> <a href ="/newdoctor"><button class="btn btn-primary" id="agregar-registro">Agregar...</button></a></td>
-                    </tr>
-                </tbody>                        
+                </thead>                    
             </table>
         </div>
     </div>      
