@@ -26,72 +26,88 @@
         </div> 
         </div> 
         <div class="col-md-7">
-            <table class="table-bordered table-striped" id="general-table">
-                <thead>
-                    <tr>
-                        <th>Registros</th>
-                        <% if(doctor.length === 0 && paciente.length === 0 && proveedor.length === 0) { %>
-                            <td>Sin registros</td>
-                          <% } else { %>
-                          
-                          <main role="main" class="container">
-                            <div class="row">
-                              <div class="col-md-8 blog-main">
-                                
-                                <% for(let i = 0; i < doctor.length; i++) { %>
-                          
-                                <div class="blog-post">
-                                  <h2 class="blog-post-title">Nombre: <%= doctor[i].nombre %></h2>
-                                  <h2 class="blog-post-title">Correo: <%= doctor[i].email %></h2>
-                                  <h2 class="blog-post-title">Número de Cédula: <%= doctor[i].cedula %></h2>
-                                  <h2 class="blog-post-title">Especialidad: <%= doctor[i].especialidad %></h2>
-                                  <h2 class="blog-post-title">Número de Pacientes: <%= doctor[i].pacientes %></h2>
-                                  <h2 class="blog-post-title">Facturas: <%= doctor[i].facturas %></h2>
-                                  <a class = "btn btn-danger" href ="/delete/<%= doctor[i]._id %>"> Delete </a>
-                                  <a class = "btn btn-info" href ="/edit/<%= doctor[i]._id %>"> Edit </a>
-                                </div>
-                          
-                                <% } %>
+          <table class="table-bordered table-striped">                        
+                  <% if(NombreAtributos[0].title == "Doctores"){ %>
+                      <thead><tr>
+                      <%  for (let i =0; i<AtributosDoctores.length; i++)     {   %>                           
+                              <th><%= AtributosDoctores[i].atributo  %></th>                           
+                          <%   }     %>
+                          <th>Opciones</th>  
+                      </tr></thead>
+                      <tbody class="table-group-divider">
+                          <%  for (let i =0; i<doctor.length; i++)     {   %>                           
+                              <tr>               
+                                  <td><%= doctor[i].nombre  %></td>   
+                                  <td><%= doctor[i].email  %></td>  
+                                  <td><%= doctor[i].cedula  %></td>  
+                                  <td><%= doctor[i].especialidad  %></td>  
+                                  <td><%= doctor[i].pacientes  %></td>  
+                                  <td> <a href="/<%=doctor[i].Facturas %>" download="Factura" class="btn btn-info btn-sm">Descargar</a></td>                          
+                                  <td>
+                                    <a class = "btn btn-danger" href ="/delete/<%= doctor[i]._id %>"> Delete </a>
+                                    <a class = "btn btn-info" href ="/edit/<%= doctor[i]._id %>"> Edit </a>
+                                  </td>  
+                              </tr>
+                          <%   }     %>
 
-                                <% for(let i = 0; i < paciente.length; i++) { %>
-                          
-                                  <div class="blog-post">
-                                    <h2 class="blog-post-title">Nombre: <%= paciente[i].nombre %></h2>
-                                    <h2 class="blog-post-title">Apellido: <%= paciente[i].apellido %></h2>
-                                    <h2 class="blog-post-title">Correo: <%= paciente[i].email %></h2>
-                                    <h2 class="blog-post-title">Sexo: <%= paciente[i].sexo %></h2>
-                                    <h2 class="blog-post-title">Edad: <%= paciente[i].edad %></h2>
-                                    <h2 class="blog-post-title">Foto: <%= paciente[i].foto %></h2>
-                                    <a class = "btn btn-danger" href ="/deletepa/<%= paciente[i]._id %>"> Delete </a>
-                                    <a class = "btn btn-info" href ="/editpa/<%= paciente[i]._id %>"> Edit </a>
-                                  </div>
-                            
-                                  <% } %>
+                      </tbody>
+                      <% }  %>
+                          <% if(NombreAtributos[1].title == "Pacientes"){ %>
+                      <thead><tr>
+                          <%  for (let i =0; i<AtributosPacientes.length; i++)     {   %>                           
+                                  <th><%= AtributosPacientes[i].atributo  %></th>                           
+                              <%   }     %>
+                              <th>Opciones</th>  
+                          </tr></thead>
+                          <tbody class="table-group-divider">
+                              <%  for (let i =0; i<paciente.length; i++)     {   %>                           
+                                  <tr>                     
+                                      <td><%= paciente[i].nombre  %></td>   
+                                      <td><%= paciente[i].apellido %></td>  
+                                      <td><%= paciente[i].email  %></td>  
+                                      <td><%= paciente[i].sexo  %></td>  
+                                      <td><%= paciente[i].edad  %></td> 
+                                      <td> <a href="/<%=paciente[i].Facturas %>" download="Factura" class="btn btn-info btn-sm">Descargar</a></td>                          
+                                      <td>
+                                        <a class = "btn btn-danger" href ="/deletepa/<%= paciente[i]._id %>"> Delete </a>
+                                        <a class = "btn btn-info" href ="/editpa/<%= paciente[i]._id %>"> Edit </a>
+                                      </td>  
+                                  </tr>
+                              <%   }     %>
+                          </tbody>
+                  <% } %>
 
-                                  <% for(let i = 0; i < proveedor.length; i++) { %>
-                          
-                                    <div class="blog-post">
-                                      <h2 class="blog-post-title">Empresa: <%= proveedor[i].empresa %></h2>
-                                      <h2 class="blog-post-title">RFC: <%= proveedor[i].rfc %></h2>
-                                      <h2 class="blog-post-title">Registro: <%= proveedor[i].registro %></h2>
-                                      <h2 class="blog-post-title">Localidad: <%= proveedor[i].localidad %></h2>
-                                      <h2 class="blog-post-title">Estado: <%= proveedor[i].estado %></h2>
-                                      <h2 class="blog-post-title">Facturas: <%= proveedor[i].tipo %></h2>
-                                      <a class = "btn btn-danger" href ="/deletepr/<%= proveedor[i]._id %>"> Delete </a>
-                                      <a class = "btn btn-info" href ="/editpr/<%= proveedor[i]._id %>"> Edit </a>
-                                    </div>
-                              
-                                    <% } %>
-                          
-                              </div>
-                            </div>
-                          </main>
-                          <% } %>
-                    </tr>
-                </thead>                    
-            </table>
-        </div>
-    </div>      
+                  <% if(NombreAtributos[2].title == "Proveedores"){ %>
+                      <thead><tr>
+                          <%  for (let i =0; i<proveedor.length; i++)     {   %>                           
+                                  <th><%= AtributosProveedores[i].atributo  %></th>                           
+                              <%   }     %>
+                              <th>Opciones</th>  
+                          </tr></thead>
+                          <tbody class="table-group-divider">
+                              <%  for (let i =0; i<proveedor.length; i++)     {   %>                           
+                                  <tr>                     
+                                      <td><%= proveedor[i].empresa  %></td>   
+                                      <td><%= proveedor[i].rfc  %></td>  
+                                      <td><%= proveedor[i].registro  %></td>  
+                                      <td><%= proveedor[i].localidad  %></td>  
+                                      <td><%= proveedor[i].estado  %></td>
+                                      <td> <a href="/<%=proveedor[i].Facturas %>" download="Factura" class="btn btn-info btn-sm">Descargar</a></td>                          
+                                      <td>
+                                        <a class = "btn btn-danger" href ="/deletepr/<%= proveedor[i]._id %>"> Delete </a>
+                                        <a class = "btn btn-info" href ="/editpr/<%= proveedor[i]._id %>"> Edit </a>
+                                      </td>  
+                                  </tr>
+                              <%   }     %>
+     
+                          </tbody>
+                  <% } %>
+
+                  
+          </table>
+      </div>
+  </div>      
+
    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous"></script>
 </body>

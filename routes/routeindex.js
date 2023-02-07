@@ -65,7 +65,7 @@ router.get("/admin", verify, async function(req,res){
     let doctor = await Doctor.find({usuario: req.userId})
     let paciente = await Paciente.find({usuario: req.userId})
     let proveedor = await Proveedor.find({usuario: req.userId})
-    res.render("admin",{doctor, paciente, proveedor})
+    res.render("admin",{doctor, paciente, proveedor, AtributosDoctores, AtributosPacientes, AtributosProveedores, NombreAtributos})
 })
 
 router.get("/", function(req,res){
