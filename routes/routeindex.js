@@ -19,20 +19,7 @@ let AtributosDoctores = [{atributo:"Nombre"},
                          {atributo:"Facturas mensuales"},
                          {atributo:"Tipo"}];
 
-let Doctores = [{Nombre:"Juanito",
-                Email:"juanito@outlook.com",
-                Cedula:"0894619",
-                Especialidad: "Cardiologo",
-                Pacientes: 20,
-                Facturas: "documentos/facturas/factura1.doc",
-                Tipo: "Doctor"},
-                {Nombre:"Anita",
-                Email:"anita@outlook.com",
-                Cedula:"0894618",
-                Especialidad: "Pediatra",
-                Pacientes: 30,
-                Facturas: "documentos/facturas/factura2.doc",
-                Tipo: "Doctor"}];
+let doctores = null
 
 let AtributosPacientes = [{atributo:"Nombre"}, 
                          {atributo:"Apellido"},
@@ -42,20 +29,7 @@ let AtributosPacientes = [{atributo:"Nombre"},
                          {atributo:"Foto"},
                          {atributo:"Tipo"}];
 
-let Pacientes = [{Nombre:"Juanito",
-                Apellido: "Godinez",
-                Email:"juanito@outlook.com",
-                Sexo:"Masculino",
-                Edad: 20,
-                Foto: "images/usuario/usuario1.jpg",
-                Tipo: "Paciente"},
-                {Nombre:"Alfonso",
-                Apellido: "Cletus",
-                Email:"cletus@outlook.com",
-                Sexo:"Masculino",
-                Edad: 22,
-                Foto: "images/usuario/usuario1.jpg",
-                Tipo: "Paciente"}];
+let pacientes = null
 
 let AtributosProveedores = [{atributo:"Nombre"}, 
                 {atributo:"Email"},
@@ -65,25 +39,32 @@ let AtributosProveedores = [{atributo:"Nombre"},
                 {atributo:"Facturas mensuales"},
                 {atributo:"Tipo"}];
 
-let Proveedores = [{Empresa:"La norteña",
-       RFC:"ASFSDGRG9890T7",
-       Registro:"0894619",
-       Localidad: "Monterrey viejon",
-       Estado: "Nuevo leon pariente",
-        Tipo: "Proveedor"},
-       {Empresa:"El Sureño",
-       RFC:"ASFSDGR4390T7",
-       Registro:"08922219",
-       Localidad: "Cabo san lucas",
-       Estado: "De loh caboh primo",
-        Tipo: "Proveedor"}];
+let proveedores = null
+
+//Function to get all dcotors
+async function getDoctors () {
+    doctores = await Doctor.find();
+}
+
+//Function to get all patients
+async function getPatients () {
+    pacientes = await Paciente.find();
+}
+
+//Function to get all providers
+async function getProviders () {
+    proveedores = await Proveedor.find();
+}
 
 router.get("/admin", function(req,res){
-    res.render("admin",{NombreAtributos, AtributosDoctores, Doctores, AtributosPacientes, Pacientes, AtributosProveedores, Proveedores})
+    getDoctors()
+    getPatients()
+    getProviders()
+    res.render("admin",{NombreAtributos, AtributosDoctores, doctores, AtributosPacientes, pacientes, AtributosProveedores, proveedores})
 })
 
-router.get("/index", function(req,res){
-    res.render("index",{NombreAtributos, AtributosDoctores, Doctores})
+router.get("/", function(req,res){
+    res.render("index",{NombreAtributos, AtributosDoctores, doctores, title: 'Inicio' })
 })
 
 router.get("/login", function(req,res){
@@ -125,6 +106,20 @@ router.post("/signup", async function(req, res){
     }
 })
 
+router.post("/newdoctor", async function(req, res){
+    //Save new doctor
+    res.render("registroDoctor")
+})
+
+router.post("/newpaciente", async function(req, res){
+    //Save new patient
+    res.render("registroDoctor")
+})
+
+router.post("/newproveedor", async function(req, res){
+    //Save new doctor
+    res.render("registroProveedor")
+})
 router.post("/login", async function(req, res){
 
     let email = req.body.email
@@ -149,11 +144,13 @@ router.post("/login", async function(req, res){
             res.cookie("token",token,{httpOnly:true})
             res.redirect("/admin")
         }else{
-            res.redirect("/login")
+            res.redirect("/")
         } 
     }
 
      
 })
+
+
 
 module.exports = router;

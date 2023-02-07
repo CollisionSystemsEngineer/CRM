@@ -12,9 +12,9 @@
         <div class="col-4">
           <div class="list-group" id="list-tab" role="tablist">
             <a class="navbar-brand">Menú</a>
-            <a class="list-group-item list-group-item-action active" id="doctores" data-bs-toggle="list" href="#list-doctores" role="tab" aria-controls="list-doctores">Doctores</a>
-            <a class="list-group-item list-group-item-action" id="pacientes" data-bs-toggle="list" href="#list-pacientes" role="tab" aria-controls="list-pacientes">Pacientes</a>
-            <a class="list-group-item list-group-item-action" id="proveedores" data-bs-toggle="list" href="#list-proveedores" role="tab" aria-controls="list-proveedore">Proveedores</a> 
+            <a class="list-group-item list-group-item-action active" id="doctores" data-bs-toggle="list" href="#list-doctores" role="tab" aria-controls="list-doctores">doctores</a>
+            <a class="list-group-item list-group-item-action" id="pacientes" data-bs-toggle="list" href="#list-pacientes" role="tab" aria-controls="list-pacientes">pacientes</a>
+            <a class="list-group-item list-group-item-action" id="proveedores" data-bs-toggle="list" href="#list-proveedores" role="tab" aria-controls="list-proveedore">proveedores</a> 
         </div>
         <div class="btn-group fixed-bottom" role="group">
             <a href="/index" class="btn btn-primary">Salir</a>
@@ -23,97 +23,18 @@
         </div> 
         </div> 
         <div class="col-md-7">
-            <table class="table-bordered table-striped">                        
-                    <% if(NombreAtributos[0].title == "Doctores"){ %>
-                        <thead><tr>
-                        <%  for (let i =0; i<AtributosDoctores.length; i++)     {   %>                           
-                                <th><%= AtributosDoctores[i].atributo  %></th>                           
-                            <%   }     %>
-                            <th>Opciones</th>  
-                        </tr></thead>
-                        <tbody class="table-group-divider">
-                            <%  for (let i =0; i<Doctores.length; i++)     {   %>                           
-                                <tr>               
-                                    <td><%= Doctores[i].Nombre  %></td>   
-                                    <td><%= Doctores[i].Email  %></td>  
-                                    <td><%= Doctores[i].Cedula  %></td>  
-                                    <td><%= Doctores[i].Especialidad  %></td>  
-                                    <td><%= Doctores[i].Pacientes  %></td>  
-                                    <td> <a href="/<%=Doctores[i].Facturas %>" download="Factura" class="btn btn-info btn-sm">Descargar</a></td>                          
-                                    <td>
-                                        <a href="/editar" class="btn btn-info btn-sm">Editar</a>
-                                        <a href="#" class="btn btn-danger btn-sm">Eliminar</a>
-                                    </td>  
-                                </tr>
-                                <div class="btn-group fixed-bottom" role="group">
-                                    <button type="submit" class="btn btn-primary"id="Btn agregar Doctor"/ >
-                                    Agregar Doctor
-                                    </button>
-                                
-                            <%   }     %>
-
-                        </tbody>
-                        <% }  %>
-                            <% if(NombreAtributos[1].title == "Pacientes"){ %>
-                        <thead><tr>
-                            <%  for (let i =0; i<AtributosPacientes.length; i++)     {   %>                           
-                                    <th><%= AtributosPacientes[i].atributo  %></th>                           
-                                <%   }     %>
-                                <th>Opciones</th>  
-                            </tr></thead>
-                            <tbody class="table-group-divider">
-                                <%  for (let i =0; i<Pacientes.length; i++)     {   %>                           
-                                    <tr>                     
-                                        <td><%= Pacientes[i].Nombre  %></td>   
-                                        <td><%= Pacientes[i].Email  %></td>  
-                                        <td><%= Pacientes[i].Cedula  %></td>  
-                                        <td><%= Pacientes[i].Especialidad  %></td>  
-                                        <td><%= Pacientes[i].Pacientes  %></td>  
-                                        <td> <a href="/<%=Pacientes[i].Facturas %>" download="Factura" class="btn btn-info btn-sm">Descargar</a></td>                          
-                                        <td>
-                                            <a href="/editar" class="btn btn-info btn-sm">Editar</a>
-                                            <a href="#" class="btn btn-danger btn-sm">Eliminar</a>
-                                        </td>  
-                                    </tr>
-                                <%   }     %>
-                            </tbody>
-                            <div class="btn-group fixed-bottom" role="group">
-                                <button type="submit" class="btn btn-primary"/ id="Btn agregar paciente">
-                                Agregar Paciente
-                                </button>
-                    <% } %>
-
-                    <% if(NombreAtributos[2].title == "Proveedores"){ %>
-                        <thead><tr>
-                            <%  for (let i =0; i<AtributosProveedores.length; i++)     {   %>                           
-                                    <th><%= AtributosProveedores[i].atributo  %></th>                           
-                                <%   }     %>
-                                <th>Opciones</th>  
-                            </tr></thead>
-                            <tbody class="table-group-divider">
-                                <%  for (let i =0; i<Proveedores.length; i++)     {   %>                           
-                                    <tr>                     
-                                        <td><%= Proveedores[i].Nombre  %></td>   
-                                        <td><%= Proveedores[i].Email  %></td>  
-                                        <td><%= Proveedores[i].Cedula  %></td>  
-                                        <td><%= Proveedores[i].Especialidad  %></td>  
-                                        <td><%= Proveedores[i].Pacientes  %></td>  
-                                        <td> <a href="/<%=Proveedores[i].Facturas %>" download="Factura" class="btn btn-info btn-sm">Descargar</a></td>                          
-                                        <td>
-                                            <a href="/editar" class="btn btn-info btn-sm">Editar</a>
-                                            <a href="#" class="btn btn-danger btn-sm">Eliminar</a>
-                                        </td>  
-                                    </tr>
-                                    <div class="btn-group fixed-bottom" role="group">
-                                        <button type="submit" class="btn btn-primary" id="btn agregar proveedor"/>
-                                        Agregar Proveedor
-                                        </button>
-                                <%   }     %>
-       
-                            </tbody>
-                    <% } %>
-
-                    
+            <table class="table-bordered table-striped" id="general-table">
+                <thead>
+                    <tr>
+                        <th>Registros</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Sin registros</td>
+                        <td><button class="btn btn-primary" id="agregar-registro">Agregar...</button></td>
+                    </tr>
+                </tbody>                        
             </table>
         </div>
     </div>      
